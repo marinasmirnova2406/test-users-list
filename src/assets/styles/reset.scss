@@ -1,0 +1,95 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  a,
+  a:link,
+  a:visited {
+    text-decoration: none;
+  }
+  
+  aside,
+  nav,
+  footer,
+  header,
+  section,
+  main {
+    display: block;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  
+  ul,
+  ol,
+  li {
+    list-style: none;
+  }
+  
+  img {
+    vertical-align: top;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  input,
+  textarea,
+  button,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+  
+  select {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+  
+  button {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+  }
+  
+  input:focus,
+  input:active,
+  button:focus,
+  button:active,
+  textarea:focus,
+  textarea:active {
+    outline: none;
+  }
+  
+  label {
+    cursor: pointer;
+  }
+  
+  legend {
+    display: block;
+  }
+  
