@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { User } from "../../types/user";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
@@ -7,8 +7,15 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 interface UsersState {
   users: User[];
+  filteredUsers: User[];
   loading: boolean;
   error: string | null;
+  filters: {
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+  };
 }
 
 // ---------------------------
@@ -50,10 +57,41 @@ const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
+    filteredUsers: [],
     loading: false,
     error: null,
+    filters: {
+      name: '',
+      username: '',
+      email: '',
+      phone: '',
+    },
   } as UsersState,
-  reducers: {},
+  reducers: {
+
+    setFilter: (state, action: PayloadAction<{ filterName: keyof UsersState['filters']; value: string }>) => {
+
+      const { filterName, value } = action.payload;
+
+      state.filters[filterName] = value;
+
+      if (Object.values(state.filters).every(value => value === '')) {
+        state.filteredUsers = state.users;
+      } else {
+        state.filteredUsers = state.users.filter(user =>
+          user.name.toLowerCase().includes(state.filters.name.toLowerCase()) &&
+          user.username.toLowerCase().includes(state.filters.username.toLowerCase()) &&
+          user.email.toLowerCase().includes(state.filters.email.toLowerCase()) &&
+          user.phone.toLowerCase().includes(state.filters.phone.toLowerCase())
+        );
+      }
+
+      
+    },
+
+
+
+  },
   extraReducers: (builder) => {
     builder
       // fetchUsers
@@ -63,6 +101,7 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
+        state.filteredUsers = action.payload;
         state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
@@ -72,5 +111,6 @@ const usersSlice = createSlice({
   },
 });
 
+export const { setFilter } = usersSlice.actions;
 export default usersSlice.reducer;
 export { fetchUsers };
