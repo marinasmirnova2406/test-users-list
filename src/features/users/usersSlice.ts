@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { User } from "../../types/user";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 // Types ---------------------
 
@@ -17,7 +18,25 @@ const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-      return res.data as User[];
+
+      const usersArray = JSON.parse(JSON.stringify(res.data));
+
+      usersArray.forEach((user: User) => {
+        const parsedUserPhone = parsePhoneNumberFromString(user.phone, "US");
+
+        if (parsedUserPhone) {
+          user.phone = parsedUserPhone.number;
+          console.log(user.phone);
+
+          parsedUserPhone.ext
+            ? (user.ext = parsedUserPhone.ext)
+            : (user.ext = null);
+        }
+
+        user.email = user.email.toLowerCase();
+      });
+
+      return usersArray as User[];
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data as string);
