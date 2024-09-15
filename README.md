@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+## Test Progect - Users List with filter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The User Management Table is a React application for displaying and filtering user data. It uses Redux for state management and TypeScript for type safety. The application fetches user data from a mock API and allows users to filter the displayed data dynamically using a search feature.
 
-## Available Scripts
+- Fetches user data from JSONPlaceholder API.
+- Displays user information in a table with columns for Name, Username, Email, and Phone.
+- Implements filtering with search inputs for each column.
+- Uses Redux / toolkit for state management.
+- Ensures type safety with TypeScript.
+- Supports styling with SCSS for a clean and functional UI.
 
-In the project directory, you can run:
+## Technologies Used
 
-### `npm start`
+- React
+- Redux / Toolkit
+- TypeScript
+- Yup (for inputs validation)
+- JSONPlaceholder API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Clone the Repository**
 
-### `npm test`
+git clone https://github.com/marinasmirnova2406/test-users-list.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Install Dependencies**
 
-### `npm run build`
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Start the Development Server**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Open your browser and go to http://localhost:3000 to see the application in action.
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Filter Users
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Use the input fields in the table header to filter users by Name, Username, Email, or Phone. The table will update dynamically as you type in these fields.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### View User Information
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The table displays user details, including Name, Username, Email, and Phone. The user information is fetched from the JSONPlaceholder API and displayed in a tabular format.Also emails and phone numbers are brought to a single format.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+_____________
+#### Maryna Smyrnova
