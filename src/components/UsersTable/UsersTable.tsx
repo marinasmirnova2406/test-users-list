@@ -76,6 +76,16 @@ const UsersTable: React.FC = () => {
     return htmlString;
   };
 
+  const resetInput = (columnName: string) => {
+    if (
+      columnName === "name" ||
+      columnName === "username" ||
+      columnName === "email" ||
+      columnName === "phone"
+    ){dispatch(setFilter({ filterName: columnName, value: "" }))}
+    
+  }
+
   return (
     <div className="table-container">
       <table className="users-table">
@@ -96,6 +106,7 @@ const UsersTable: React.FC = () => {
                 onChange={handleFilterChange}
                 placeholder="Filter by name..."
               />
+              <button type="button" className="users-table__head__filters__reset-btn" onClick={() => resetInput("name")}>X</button>
             </th>
             <th>
               <input
@@ -106,6 +117,7 @@ const UsersTable: React.FC = () => {
                 onChange={handleFilterChange}
                 placeholder="Filter by username..."
               />
+              <button type="button" className="users-table__head__filters__reset-btn" onClick={() => resetInput("username")}>X</button>
             </th>
             <th>
               <input
@@ -116,6 +128,7 @@ const UsersTable: React.FC = () => {
                 onChange={handleFilterChange}
                 placeholder="Filter by email..."
               />
+              <button type="button" className="users-table__head__filters__reset-btn" onClick={() => resetInput("email")}>X</button>
             </th>
             <th>
               <input
@@ -128,6 +141,7 @@ const UsersTable: React.FC = () => {
                 onChange={handleFilterChange}
                 placeholder="Filter by phone number..."
               />
+              <button type="button" className="users-table__head__filters__reset-btn" onClick={() => resetInput("phone")}>X</button>
             </th>
           </tr>
         </thead>

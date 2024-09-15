@@ -25,11 +25,6 @@
     }
   }
 
-  th {
-  }
-
-  td {
-  }
 
   &__head {
     width: 100%;
@@ -54,10 +49,12 @@
 
       th {
         border-right: 1px solid rgb(114, 114, 114);
+        text-align: left;
+        position: relative;
       }
 
       &__item {
-        width: 100%;
+        width: 90%;
         height: 20px;
         font-size: 16px;
         color: rgb(255, 255, 255);
@@ -65,6 +62,18 @@
         &::placeholder {
           color: rgb(216, 216, 216);
         }
+
+        
+      }
+
+      &__reset-btn {
+        border: 1px solid rgb(197, 197, 197);
+        position: absolute;
+        right: 6px;
+        font-size: 12px;
+        padding: 3px 6px;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
