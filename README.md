@@ -26,7 +26,7 @@ git clone https://github.com/marinasmirnova2406/test-users-list.git
 
 npm install
 
-**Install Dependencies**
+**Start the Development Server**
 
 npm start
 
