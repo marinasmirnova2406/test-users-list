@@ -33,8 +33,6 @@ const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
 
         if (parsedUserPhone) {
           user.phone = parsedUserPhone.number;
-          console.log(user.phone);
-
           parsedUserPhone.ext
             ? (user.ext = parsedUserPhone.ext)
             : (user.ext = null);
@@ -61,36 +59,42 @@ const usersSlice = createSlice({
     loading: false,
     error: null,
     filters: {
-      name: '',
-      username: '',
-      email: '',
-      phone: '',
+      name: "",
+      username: "",
+      email: "",
+      phone: "",
     },
   } as UsersState,
   reducers: {
-
-    setFilter: (state, action: PayloadAction<{ filterName: keyof UsersState['filters']; value: string }>) => {
-
+    setFilter: (
+      state,
+      action: PayloadAction<{
+        filterName: keyof UsersState["filters"];
+        value: string;
+      }>
+    ) => {
       const { filterName, value } = action.payload;
 
       state.filters[filterName] = value;
 
-      if (Object.values(state.filters).every(value => value === '')) {
+      if (Object.values(state.filters).every((value) => value === "")) {
         state.filteredUsers = state.users;
       } else {
-        state.filteredUsers = state.users.filter(user =>
-          user.name.toLowerCase().includes(state.filters.name.toLowerCase()) &&
-          user.username.toLowerCase().includes(state.filters.username.toLowerCase()) &&
-          user.email.toLowerCase().includes(state.filters.email.toLowerCase()) &&
-          user.phone.toLowerCase().includes(state.filters.phone.toLowerCase())
+        state.filteredUsers = state.users.filter(
+          (user) =>
+            user.name
+              .toLowerCase()
+              .includes(state.filters.name.toLowerCase()) &&
+            user.username
+              .toLowerCase()
+              .includes(state.filters.username.toLowerCase()) &&
+            user.email
+              .toLowerCase()
+              .includes(state.filters.email.toLowerCase()) &&
+            user.phone.toLowerCase().includes(state.filters.phone.toLowerCase())
         );
       }
-
-      
     },
-
-
-
   },
   extraReducers: (builder) => {
     builder

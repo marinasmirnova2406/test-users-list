@@ -67,19 +67,28 @@
         }
       }
     }
-
-    
   }
 
   &__body {
+    tr:hover {
+      background-color: rgb(233, 238, 255);
+    }
+
     tr:nth-child(even) {
       background-color: rgb(240, 240, 240);
+
+      &:hover {
+        background-color: rgb(220, 226, 240);
+      }
     }
 
     td {
       padding: 5px;
 
-      span:not(.users-table__body__ext) {
+      span:not(
+          .users-table__body__without-span-style,
+          .users-table__body__ext
+        ) {
         display: inline-flex;
         align-items: flex-end;
         padding: 8px 10px;
@@ -87,13 +96,16 @@
         color: rgb(27, 27, 27);
         font-size: 16px;
         border: 1px solid rgb(197, 197, 197);
-      }
 
-      
+        b {
+          color: rgb(21, 29, 56);
+          padding: 0 1px;
+        }
+      }
+    }
+    &__ext {
+      font-size: 14px;
+      padding-left: 10px;
+    }
   }
-  &__ext {
-    font-size: 14px;
-    padding-left: 10px;
-  }
-}
 }

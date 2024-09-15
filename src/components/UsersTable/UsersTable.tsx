@@ -4,7 +4,6 @@ import { fetchUsers, setFilter } from "../../features/users/usersSlice";
 import { RootState, AppDispatch } from "../../types/index";
 import { User } from "../../types/user";
 import { usersTableSchema } from "./usersTableSchema";
-import * as Yup from "yup";
 
 const UsersTable: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,10 +22,12 @@ const UsersTable: React.FC = () => {
   const handleFilterChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === "name" ||
+    if (
+      name === "name" ||
       name === "username" ||
       name === "email" ||
-      name === "phone") {
+      name === "phone"
+    ) {
       try {
         if (value) {
           await usersTableSchema.validateAt(name, { [name]: value });
@@ -34,10 +35,45 @@ const UsersTable: React.FC = () => {
         dispatch(setFilter({ filterName: name, value }));
       } catch (error) {
         console.log("Error in handleFilterChange function");
-        
       }
     }
+  };
 
+  const highlightMatches = (columnName: string, userPropValue: string) => {
+    if (filters[columnName] === "") {
+      return userPropValue;
+    }
+
+    const subString = filters[columnName];
+
+    let htmlString = "";
+    let startIndex = 0;
+    let i = userPropValue
+      .toLowerCase()
+      .indexOf(subString.toLowerCase(), startIndex);
+
+    console.log(i);
+
+    while (i !== -1) {
+      htmlString += userPropValue.substring(startIndex, i);
+
+      htmlString += `<b>${userPropValue.substring(
+        i,
+        i + subString.length
+      )}</b>`;
+
+      startIndex = i + subString.length;
+
+      i = userPropValue
+        .toLowerCase()
+        .indexOf(subString.toLowerCase(), startIndex);
+    }
+
+    htmlString += userPropValue.substring(startIndex);
+
+    console.log(htmlString);
+
+    return htmlString;
   };
 
   return (
@@ -99,20 +135,39 @@ const UsersTable: React.FC = () => {
           {filteredUsers.map((user: User) => (
             <tr key={user.id}>
               <td>
-                <span>{user.name}</span>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: highlightMatches("name", user.name),
+                  }}
+                />
               </td>
               <td>
-                <span>{user.username}</span>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: highlightMatches("username", user.username),
+                  }}
+                />
               </td>
               <td>
-                <span>{user.email}</span>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: highlightMatches("email", user.email),
+                  }}
+                />
               </td>
               <td>
                 <span>
-                  {user.phone}{" "}
+                  {
+                    <span
+                      className="users-table__body__without-span-style"
+                      dangerouslySetInnerHTML={{
+                        __html: highlightMatches("phone", user.phone),
+                      }}
+                    />
+                  }{" "}
                   {user.ext && (
                     <span className="users-table__body__ext">
-                      ext. {user.ext}
+                         ext. {user.ext}
                     </span>
                   )}
                 </span>
